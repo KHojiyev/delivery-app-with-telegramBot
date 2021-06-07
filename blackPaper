@@ -1,0 +1,70 @@
+public SendMessage setInlineOrder(long chatId, String text, String activeLanguage) {
+    InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+    InlineKeyboardButton button1 = new InlineKeyboardButton();
+    InlineKeyboardButton button2 = new InlineKeyboardButton();
+               switch (activeLanguage) {
+                   case "uz":
+                       button1.setCallbackData(Language.ORDER_PIZZA.getUzb());
+                       button1.setText(Language.ORDER_PIZZA.getUzb());
+                       button2.setCallbackData(Language.DELETE_ORDER.getUzb());
+                       button2.setText(Language.DELETE_ORDER.getUzb());
+                       break;
+                   case "ru":
+                       button1.setCallbackData(Language.ORDER_PIZZA.getRus());
+                       button1.setText(Language.ORDER_PIZZA.getRus());
+                       button2.setCallbackData(Language.DELETE_ORDER.getRus());
+                       button2.setText(Language.DELETE_ORDER.getRus());
+                       break;
+                   case "en":
+                       button1.setCallbackData(Language.ORDER_PIZZA.getEng());
+                       button1.setText(Language.ORDER_PIZZA.getEng());
+                       button2.setCallbackData(Language.DELETE_ORDER.getEng());
+                       button2.setText(Language.DELETE_ORDER.getEng());
+                       break;
+               }
+
+               List<InlineKeyboardButton> buttonList = new ArrayList<>();
+               buttonList.add(button1);
+               buttonList.add(button2);
+               List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+               rowList.add(buttonList);
+               inlineKeyboardMarkup.setKeyboard(rowList);
+               return new SendMessage().setText(text).setChatId(chatId).setReplyMarkup(inlineKeyboardMarkup);
+           }
+
+         if (update.getMessage().getText().startsWith("dan Yangi buyurtma")) {
+                        File file = new File("src/main/java/module3/lesson10_TelegramBot/ExtraTask/Components/Orders.txt");
+                        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,true))) {
+                            bufferedWriter.write(update.getMessage().getText()+System.getProperty("line.separator"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        sendMessage.setText(update.getMessage().getText());
+                        try {
+                            execute(sendMessage);
+                            execute(setInlineOrder(update.getMessage().getChatId()," " ));
+                        } catch (TelegramApiException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+Message{messageId=286, from=User{id=1763927910, firstName='Delivery_Service_Manager', isBot=true, lastName='null',
+ userName='Delivery_Service_Manager_BOT', languageCode='null', canJoinGroups=null, canReadAllGroupMessages=null,
+ supportInlineQueries=null}, date=1618247583, chat=Chat{id=745485034, type='private', title='null',
+ firstName='KHojiyev', lastName='null', userName='KHojiyevLM', allMembersAreAdministrators=null,
+ photo=null, description='null', inviteLink='null', pinnedMessage=null, stickerSetName='null',
+ canSetStickerSet=null, permissions=null, slowModeDelay=null}, forwardFrom=null, forwardFromChat=null,
+
+ forwardDate=null, text='@KHojiyevLM dan Yangi buyurtma Name: New York-Style Pizza // Count:3',
+
+ entities=[MessageEntity{type='mention', offset=0, length=11, url='null', user=null, language='null',
+ text='null'}], captionEntities=null, audio=null, document=null, photo=null, sticker=null,
+ video=null, contact=null, location=null, venue=null, animation=null, pinnedMessage=null, newChatMembers=null,
+ leftChatMember=null, newChatTitle='null', newChatPhoto=null, deleteChatPhoto=null, groupchatCreated=null,
+ replyToMessage=null, voice=null, caption='null', superGroupCreated=null, channelChatCreated=null,
+ migrateToChatId=null, migrateFromChatId=null, editDate=null, game=null, forwardFromMessageId=null,
+ invoice=null, successfulPayment=null, videoNote=null, authorSignature='null', forwardSignature='null',
+ mediaGroupId='null', connectedWebsite='null', passportData=null, forwardSenderName='null', poll=null,
+ replyMarkup=InlineKeyboardMarkup{inline_keyboard=[[InlineKeyboardButton{text='Qabul qilish', url='null',
+ callbackData='qabulQilish', callbackGame=null, switchInlineQuery='null', switchInlineQueryCurrentChat='null',
+ pay=null, loginUrl=null}]]}, dice=null, viaBot=null}
